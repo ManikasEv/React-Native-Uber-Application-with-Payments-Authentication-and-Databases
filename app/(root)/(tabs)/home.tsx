@@ -16,6 +16,7 @@ import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
 import { useEffect, useState } from "react";
+import { router } from "expo-router";
 const recentRides = [
   {
     ride_id: "1",
@@ -130,7 +131,14 @@ export default function Page() {
 
   const [hasPermissions, setHasPermissions] = useState(false);
 
-  const handleDestinationPress = () => {};
+  const handleDestinationPress = (Location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(Location);
+    router.push("/(root)/find-ride");
+  };
   const handleSignOut = () => {};
 
   //Get Location Permission

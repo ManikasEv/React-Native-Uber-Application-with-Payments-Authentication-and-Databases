@@ -4,6 +4,7 @@ import React from "react";
 import { Redirect } from "expo-router";
 import { View, Text } from "react-native";
 import { useAuth } from "@clerk/clerk-expo";
+import "react-native-get-random-values";
 
 const Page = () => {
   const { isSignedIn } = useAuth();

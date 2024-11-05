@@ -60,8 +60,8 @@ const Map = () => {
     destinationLatitude,
     destinationLongitude,
   } = useLocationStore();
+  const { selectedDriver, setDrivers } = useDriverStore();
 
-  const { selectedDriver } = useDriverStore();
   const [markers, setMarkers] = useState<MarkerData[]>([]);
 
   const region = calculateRegion({
@@ -71,8 +71,9 @@ const Map = () => {
     destinationLongitude,
   });
 
-  // Use effect to handle marker generation
   useEffect(() => {
+    setDrivers(drivers);
+
     if (userLatitude && userLongitude) {
       const newMarkers = generateMarkersFromData({
         data: drivers,
@@ -83,7 +84,6 @@ const Map = () => {
     }
   }, [drivers, userLatitude, userLongitude]);
 
-  // Check if user location is available before rendering the map
   if (userLatitude === null || userLongitude === null) {
     return <Text>Loading user location...</Text>;
   }
