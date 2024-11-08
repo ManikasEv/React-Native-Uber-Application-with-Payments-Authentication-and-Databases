@@ -17,6 +17,9 @@ import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
 import { useEffect, useState } from "react";
 import { router } from "expo-router";
+import CustomButton from "@/components/CustomButton";
+import * as Sentry from "@sentry/react-native";
+
 const recentRides = [
   {
     ride_id: "1",
@@ -184,9 +187,16 @@ export default function Page() {
   useEffect(() => {
     // console.log("Location permission status:", hasPermissions);
   }, [hasPermissions]);
+  const handleSentryError = () => {
+    Sentry.captureException(new Error("This is a test error"));
+  };
 
   return (
     <SafeAreaView className="bg-general-500">
+      {/*<CustomButton*/}
+      {/*  onPress={handleSentryError}*/}
+      {/*  title={"Send an error to Sentry"}*/}
+      {/*/>*/}
       <FlatList
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
